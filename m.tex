@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage[a4paper,margin=0.5in]{geometry}
+
+\begin{document}
+
+Let $M$ be a smooth Riemannian Manifold. If you have a coordinate system, say $\xi=(x^{1},...,x^{n})$ at $p$ in $M$, then a basis for the tangent space $T_p M$ is given by $\left\{\frac{\partial}{\partial x^{1}}, \ldots, \frac{\partial}{\partial x^{n}}\right\}$, where we simply write it as $\left\{\partial_1, \ldots, \partial_n \right\}$. The basis theorem (I'm following the book of Semi-Riemannian Geometry, by Barrett O'Neill) says that, any vector $v$ tangent to $M$ at $p$ can be written as 
+\begin{equation*}
+      v = \sum_{i=1}^{n} v(x^{i}) \partial_i.
+\end{equation*}
+
+For your example, we have $\xi = (x,y,z)$ as the natural coordinate system in $\mathbb{R}^{3}$ with $\left\{\partial_x, \partial_y, \partial_z\right\}$ associated tangent basis and we let $\eta = (a,\phi,h)$ be the natural cylindrical coordinate system in $\mathbb{R}^{3} - H$, where $H$ is the hyperplane $x \geq 0, y=0$. Now we can define $x = acos\phi$, $y=asin\phi$ and $z=h$. Notice that $$\left\{\frac{\partial}{\partial a},\frac{\partial}{\partial \phi},\frac{\partial}{\partial h}\right\} \stackrel{notation}{=} \left\{\partial_a, \partial_\phi, \partial_h\right\}$$
+is composed by tangent vectors, where we can apply The Basis Theorem:
+\begin{align}
+   \partial_a &= \partial_a(x)\partial_x + \partial_a(y)\partial_y + \partial_a(z)\partial_h\\
+              &= \partial_\phi(a\cos\phi)\partial_x + \partial_\phi(a\sin\phi)\partial_y + \partial_\phi(z)\partial_h\\
+              &= \cos\phi\partial_x + \sin\phi\partial_y,
+\end{align}
+\begin{align}
+   \partial_\phi &= \partial_\phi(x)\partial_x + \partial_\phi(y)\partial_y + \partial_\phi(z)\partial_h\\
+              &= \partial_\phi(a\cos\phi)\partial_x + \partial_\phi(a\sin\phi)\partial_y + \partial_\phi(z)\partial_h\\
+              &= -a\sin\phi\partial_x + a\cos\phi\partial_y
+\end{align}
+and
+\begin{align}
+     \partial_h &= \partial_h(x)\partial_x + \partial_h(y)\partial_y + \partial_h(z)\partial_h\\
+                &= \partial_h(a\cos\phi)\partial_x + \partial_h(a\sin\phi)\partial_y + \partial_h(z)\partial_h\\
+                &= \partial_h.
+\end{align}
+
+Now, as every metric $g$ is a $(0,2)$ type tensor, that is, it's written in a basis with two one forms and it's fed with two vector fields, it returns (when applied to a point in the Manifold) a real value. If $\xi$ is that coordinate system given, then we have a basis for the cotangent space $\{dx^{1}, \ldots, dx^{n}\}$. We can write it as
+\begin{equation}
+       g = \sum g_{ij} dx^{i} \otimes dx^{j},
+\end{equation}
+where $g_{ij} = g\left(\partial_i,\partial_j \right)$ and so our line element is
+$$q = ds^{2} = \sum g_{ij} dx^{i}dx^{j}.$$
+
+For your example, from $\left\{\partial_a, \partial_\phi, \partial_h\right\}$ we have $\{da, d\phi, dh\}$ as the cotangent basis associated. Set $a = y^{1}, \phi = y^{2}$ and $h = y^{3}$ and the line element above on the $\eta$ coordinate system can be written as 
+$$ds^{2} = \sum_{i,j = 1}^{3} g_{ij} dy^{i}dy^{j}$$
+
+We are almost done! The last thing needed are those $g_{ij}$.
+\begin{align}
+    g_{11} &= g(\partial_a, \partial_a) = \cos^{2}\phi + \sin^{2}\phi = 1\\
+    g_{22} &= g(\partial_\phi, \partial_\phi) = a^{2}\sin^{2}\phi + a^{2}cos^{2}\phi = a^{2}\\
+    g_{33} &= g(\partial_h,\partial_h) = 1
+\end{align}
+while $g_{ij} = 0$ for $i \neq j$, because $g(\partial_a,\partial_\phi) = -a\sin\phi\cos\phi + a\sin\phi\cos\phi = 0$ and $g(.,\partial_h) = 0$ because the other vectors have $0$ as component in the $\partial_h$ direction.
+
+Finally, we obtain
+\begin{equation}
+    ds^{2} = g_{11}da da + g_{22}d\phi d\phi + g_{33}dh dh = da^{2} + a^{2}d\phi^{2} + dh^{2},
+\end{equation}
+
+as desired.
+
+\end{document}
